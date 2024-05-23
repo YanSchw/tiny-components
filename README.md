@@ -19,4 +19,8 @@ Then, add an HTML Tag that has the same name as your Component into the DOM.
 ```
 Attributes you define in the HTML are available as Attributes in the JavaScript object.
 
-**'Hello!'** now appears in the Component's place. 
+**'Hello!'** now appears in the Component's place.
+
+## Examples
+Here are some examples:
+- https://YanSchw.github.io/tiny-components/example/index.html
