@@ -24,6 +24,7 @@ function includeHTML(nodeDOM, path) {
 }
 
 function constructComponentInnerHTML(nodeDOM, func) {
+    nodeDOM.innerHTML = "";
     func(nodeDOM, internal.domToObjMap.get(nodeDOM));
 }
 function createComponentObject(nodeDOM) {
