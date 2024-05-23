@@ -1,3 +1,4 @@
+"use strict";
 
 if (!window._libTinyComponentLoaded) {
     window._libTinyComponentLoaded = true;
