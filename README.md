@@ -33,4 +33,4 @@ The built-in **include** Component is a C-like cut-and-paste tool, that let's yo
 
 ## Examples
 Here are some examples:
-- https://YanSchw.github.io/tiny-components/example/index.html
+- https://YanSchw.github.io/tiny-components/examples/hello-world/index.html
