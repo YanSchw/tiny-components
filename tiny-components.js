@@ -45,6 +45,12 @@ function createComponentObject(nodeDOM) {
             obj[att.nodeName] = att.nodeValue;
         }
 
+        obj.redraw = function() {
+            if (nodeDOM.classList.contains('tiny-component')) {
+                nodeDOM.classList.remove('tiny-component');
+            }
+        };
+
         internal.domToObjMap.set(nodeDOM, obj);
         nodeDOM.classList.add(`tiny-id-${obj.tinyid}`);
     }
