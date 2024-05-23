@@ -86,6 +86,7 @@ const observer = new MutationObserver((mutations) => {
 observer.observe(document.querySelector('body'), {
     subtree: true,
     childList: true,
+    attributes: true,
 });
 
 
