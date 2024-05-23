@@ -13,6 +13,7 @@
                 nodeDOM.innerHTML += `<p>The button was clicked ${obj.count} times.</p>`;
 
                 let button = document.createElement('button');
+                button.innerHTML = 'Click me!';
                 button.onclick = () => {
                     obj.count++;
                     obj.redraw();
