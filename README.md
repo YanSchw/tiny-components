@@ -19,4 +19,4 @@ Then, add an HTML Tag that has the same name as your Component into the DOM.
 ```
 Attributes you define in the HTML are available as Attributes in the JavaScript object.
 
-**'Hello!'** now appears in the Components place. 
+**'Hello!'** now appears in the Component's place. 
