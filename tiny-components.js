@@ -50,3 +50,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
 const observer = new MutationObserver((mutations) => {
     initializeAllComponents();
 });
+observer.observe(document.querySelector('body'), {
+    subtree: true,
+    childList: true,
+});
