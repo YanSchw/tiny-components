@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>counter</title>
+    </head>
+    <body>
+        <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
+        <script>
+            component('counter', (nodeDOM, obj) => {
+                if (obj.count == undefined) {
+                    obj.count = 0;
+                }
+                nodeDOM.innerHTML += `<p>The button was clicked ${obj.count} times.</p>`;
+
+                let button = document.createElement('button');
+                button.click = () => {
+                    obj.count++;
+                    obj.redraw();
+                    console.log('button clicked.');
+                };
+                nodeDOM.appendChild(button);
+            });
+        </script>
+        <counter></counter>
+    </body>
+</html>
