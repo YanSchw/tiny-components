@@ -16,3 +16,4 @@ export default tiny;
 document.addEventListener("DOMContentLoaded", (event) => {
     tiny.initializeAllComponents();
 });
+console.log('hi()');
