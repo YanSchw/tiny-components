@@ -75,3 +75,14 @@ observer.observe(document.querySelector('body'), {
     subtree: true,
     childList: true,
 });
+
+
+/* Built-in Components */
+
+component('include', (nodeDOM, obj) => {
+    if (obj.value == undefined) {
+        console.error('include value missing!');
+        return;
+    }
+    includeHTML(nodeDOM, obj.value);
+});
