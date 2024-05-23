@@ -21,6 +21,16 @@ Attributes you define in the HTML are available as Attributes in the JavaScript 
 
 **'Hello!'** now appears in the Component's place.
 
+## Built-in Components
+
+#### &lt;include value="..."&gt;
+The built-in **include** Component is a C-like cut-and-paste tool, that let's you inject HTML-Text.
+```HTML
+<include value="/html/navigation.html"></include>
+```
+
+## Additional Components
+
 ## Examples
 Here are some examples:
 - https://YanSchw.github.io/tiny-components/example/index.html
