@@ -21,6 +21,19 @@ Attributes you define in the HTML are available as Attributes in the JavaScript 
 
 **'Hello!'** now appears in the Component's place.
 
+## Redrawing Components
+If you want to redraw a Component, you have to explicitly tell the library to do so.
+```js
+component('my-redrawing-button', (nodeDOM, obj) => {
+    let button = document.createElement('button');
+    button.innerHTML = 'Redraw this Component';
+    button.onclick = () => {
+        obj.redraw();
+    };
+    nodeDOM.appendChild(button);
+});
+```
+
 ## Built-in Components
 
 #### &lt;include value="..."&gt;
