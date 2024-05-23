@@ -26,6 +26,11 @@ function includeHTML(nodeDOM, path) {
 function constructComponentInnerHTML(nodeDOM, func) {
     nodeDOM.innerHTML = "";
     func(nodeDOM, internal.domToObjMap.get(nodeDOM));
+
+    let nodeList = nodeDOM.querySelectorAll(":scope > innerHTML");
+    for (let inner of nodeList) {
+        inner.innerHTML = internal.domToObjMap.get(nodeDOM).innerHTML;
+    }
 }
 function createComponentObject(nodeDOM) {
     if (!internal.domToObjMap.has(nodeDOM)) {
