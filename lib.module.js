@@ -2,6 +2,7 @@
 const tiny = {
     initializeAllComponents() {
 
+        console.log('initializeAllComponents()');
     },
     component(tag, func) {
         console.log(tag);
