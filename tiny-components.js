@@ -11,6 +11,18 @@ const internal = {
     domToObjMap: new Map()
 };
 
+function includeHTML(nodeDOM, path) {
+    try {
+        fetch(path).then(response => {
+            response.text().then(txt => {
+                nodeDOM.innerHTML += txt;
+            });
+        });
+    } catch(error) {
+        console.error("Include Error:", error);
+    }
+}
+
 function constructComponentInnerHTML(nodeDOM, func) {
     func(nodeDOM, internal.domToObjMap.get(nodeDOM));
 }
