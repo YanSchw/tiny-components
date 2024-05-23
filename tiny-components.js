@@ -48,6 +48,7 @@ function createComponentObject(nodeDOM) {
         obj.redraw = function() {
             if (nodeDOM.classList.contains('tiny-component')) {
                 nodeDOM.classList.remove('tiny-component');
+                setTimeout(initializeAllComponents, 0);
             }
         };
 
