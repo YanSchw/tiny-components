@@ -30,6 +30,7 @@ function createComponentObject(nodeDOM) {
     if (!internal.domToObjMap.has(nodeDOM)) {
         let obj = {};
         obj.tinyid = internal.globalIdCounter++;
+        obj.innerHTML = nodeDOM.innerHTML;
 
         // Add Attributes to object
         for (let att, i = 0, atts = nodeDOM.attributes, n = atts.length; i < n; i++) {
