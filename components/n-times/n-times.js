@@ -2,7 +2,7 @@
 
 component('n-times', (nodeDOM, obj) => {
     if (obj.n == undefined) {
-        console.error('The "n-times" Component requires a attribute named n!');
+        console.error('The "n-times" Component requires an attribute named n!');
         return;
     }
     

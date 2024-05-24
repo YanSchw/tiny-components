@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>if</title>
+    </head>
+    <body>
+        <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
+        <script src="https://YanSchw.github.io/tiny-components/components/if/if.js"></script>
+        <script>
+            component('if-test', (nodeDOM, obj) => {
+                nodeDOM.innerHTML = '<innerHTML></innerHTML>';
+
+                let button = document.createElement('button');
+                button.innerHTML = 'Click me!';
+                button.onclick = () => {
+                    obj.count++;
+                    obj.redraw();
+                    console.log('button clicked.');
+                };
+                nodeDOM.appendChild(button);
+            });
+        </script>
+
+        <if-test>
+            <if cond="Math.rand() > 0.5">
+                <p>True</p>
+            </if>
+        </if-test>
+        
+    </body>
+</html>
