@@ -72,7 +72,7 @@ function initializeAllComponents() {
             let init = true;
 
             for (let otherComp of internal.componentMap) {
-                if (nodeDOM.parentElement.closest(otherComp[0]) != null) {
+                if (nodeDOM.parentElement.closest(`${otherComp[0]}:not(.tiny-component)`) != null) {
                     // There is an uninitialized Parent
                     setTimeout(() => { initializeAllComponents(); }, 0);
                     init = false;
