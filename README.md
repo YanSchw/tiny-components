@@ -1,7 +1,7 @@
 # &lt;tiny-components&gt;
 
 This is a lightweight JavaScript library, that allows you to dynamically create reuseable Components through HTML Tags.
-You will use plain and standard HTML with custom elements. However the library only comes with 1 built-in Component, so there is no bloat, no new HTML dialect or syntax sugar to learn.
+You will use plain and standard HTML with custom elements. However the library only comes with 2 built-in Component, so there is no bloat, no new HTML dialect or syntax sugar to learn.
 
 ## What is a Component?
 
@@ -46,6 +46,17 @@ The built-in **include** Component is a C-like cut-and-paste tool, that let's yo
 ```HTML
 <include value="/html/navigation.html"></include>
 ```
+
+#### &lt;echo&gt;
+The built-in **echo** Component Parses a block of JavaScript and puts the last evaluated expression into the innerHTML.
+```HTML
+<echo>
+    let a = "<p>he";
+    let b = "llo</p>";
+    a + b;
+</echo>
+```
+This creates a Paragraph, that says **hello**
 
 ## Additional Components
 
