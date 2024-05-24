@@ -68,7 +68,21 @@ function initializeAllComponents() {
     for (let comp of internal.componentMap) {
         let nodeList = document.querySelectorAll(comp[0]);
         for (let nodeDOM of nodeList) {
-            initializeComponent(nodeDOM, comp[1]);
+
+            let init = true;
+
+            for (let otherComp of internal.componentMap) {
+                if (nodeDOM.parentElement.closest(otherComp[0]) != null) {
+                    // There is an uninitialized Parent
+                    setTimeout(initializeAllComponents, 0);
+                    init = false;
+                    break;
+                }
+            }
+
+            if (init) {
+                initializeComponent(nodeDOM, comp[1]);
+            }
         }
     }
 }
