@@ -13,9 +13,7 @@
                 let button = document.createElement('button');
                 button.innerHTML = 'Click me!';
                 button.onclick = () => {
-                    obj.count++;
                     obj.redraw();
-                    console.log('button clicked.');
                 };
                 nodeDOM.appendChild(button);
             });
