@@ -99,3 +99,7 @@ component('include', (nodeDOM, obj) => {
     }
     includeHTML(nodeDOM, obj.value);
 });
+
+component('echo', (nodeDOM, obj) => {
+    nodeDOM.innerHTML = eval(obj.innerHTML);
+});
