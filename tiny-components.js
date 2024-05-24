@@ -74,7 +74,7 @@ function initializeAllComponents() {
             for (let otherComp of internal.componentMap) {
                 if (nodeDOM.parentElement.closest(otherComp[0]) != null) {
                     // There is an uninitialized Parent
-                    setTimeout(initializeAllComponents, 0);
+                    setTimeout(() => { initializeAllComponents(); }, 0);
                     init = false;
                     break;
                 }
