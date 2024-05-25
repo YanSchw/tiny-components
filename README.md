@@ -39,6 +39,23 @@ component('my-redrawing-button', (nodeDOM, obj) => {
 });
 ```
 
+## Creating DOM Nodes | Elements dynamically
+
+Using this function
+```js
+function createNode(tag, parent, lambda) {
+    let element = document.createElement(tag);
+    lambda(element);
+    parent.appendChild(element);
+}
+```
+you can easily create new DOM Elementes as one-liners or nest them within each other. For example:
+```js
+createNode('div', document.querySelector('body'), div => {
+    createNode('p', div, p => p.innerText = 'Hello!');
+});
+```
+
 ## Built-in Components
 
 #### &lt;include value="..."&gt;

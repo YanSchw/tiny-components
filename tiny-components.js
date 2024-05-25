@@ -91,6 +91,12 @@ function component(tag, func) {
     internal.componentMap.set(tag, func);
 }
 
+function createNode(tag, parent, lambda) {
+    let element = document.createElement(tag);
+    lambda(element);
+    parent.appendChild(element);
+}
+
 document.addEventListener("DOMContentLoaded", (event) => {
     initializeAllComponents();
 });
