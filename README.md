@@ -1,7 +1,7 @@
 # &lt;tiny-components&gt;
 
 This is a lightweight JavaScript library, that allows you to dynamically create reuseable Components through HTML Tags.
-You will use plain and standard HTML with custom elements. However the library only comes with 2 built-in Component, so there is no bloat, no new HTML dialect or syntax sugar to learn.
+You will use plain and standard HTML with custom elements. However the library only comes with 2 built-in Component, so there is no bloat, no new HTML dialect, no boilerplate, no syntax sugar to learn.
 
 ## What is a Component?
 
