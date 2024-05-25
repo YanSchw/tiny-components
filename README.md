@@ -39,6 +39,17 @@ component('my-redrawing-button', (nodeDOM, obj) => {
 });
 ```
 
+## Using select() and selectAll()
+Using these functions your can spare some typing:
+```js
+function select(cssSelector) {
+    return document.querySelector(cssSelector);
+}
+function selectAll(cssSelector) {
+    return document.querySelectorAll(cssSelector);
+}
+```
+
 ## Creating DOM Nodes | Elements dynamically
 
 Using this function
@@ -51,10 +62,11 @@ function createNode(tag, parent, lambda) {
 ```
 you can easily create new DOM Elementes as one-liners or nest them within each other. For example:
 ```js
-createNode('div', document.querySelector('body'), div => {
+createNode('div', select('body'), div => {
     createNode('p', div, p => p.innerText = 'Hello!');
 });
 ```
+creates a 'Hello!' Paragraph within a div within the HTML body.
 
 ## Built-in Components
 

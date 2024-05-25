@@ -91,6 +91,12 @@ function component(tag, func) {
     internal.componentMap.set(tag, func);
 }
 
+function select(cssSelector) {
+    return document.querySelector(cssSelector);
+}
+function selectAll(cssSelector) {
+    return document.querySelectorAll(cssSelector);
+}
 function createNode(tag, parent, lambda) {
     let element = document.createElement(tag);
     lambda(element);
