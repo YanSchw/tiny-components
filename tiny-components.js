@@ -8,7 +8,8 @@ if (!window._libTinyComponentLoaded) {
 
 const internal = {
     globalIdCounter: 1,
-    componentMap: new Map()
+    componentMap: new Map(),
+    domToObjMap: new Map()
 };
 
 function includeHTML(nodeDOM, path) {
@@ -25,31 +26,33 @@ function includeHTML(nodeDOM, path) {
 
 function constructComponentInnerHTML(nodeDOM, func) {
     nodeDOM.innerHTML = "";
-    func(nodeDOM);
+    func(nodeDOM, internal.domToObjMap.get(nodeDOM));
 
     let nodeList = nodeDOM.querySelectorAll(":scope > innerHTML");
     for (let inner of nodeList) {
-        inner.innerHTML = nodeDOM.innerHTMLCached;
+        inner.innerHTML = internal.domToObjMap.get(nodeDOM).innerHTML;
     }
 }
 function createComponentObject(nodeDOM) {
-    if (nodeDOM.tinyid == undefined) {
-        nodeDOM.tinyid = internal.globalIdCounter++;
-        nodeDOM.innerHTMLCached = nodeDOM.innerHTML;
+    if (!internal.domToObjMap.has(nodeDOM)) {
+        let obj = {};
+        obj.tinyid = internal.globalIdCounter++;
+        obj.innerHTML = nodeDOM.innerHTML;
 
         // Add Attributes to object
         for (let att, i = 0, atts = nodeDOM.attributes, n = atts.length; i < n; i++) {
             att = atts[i];
-            nodeDOM[att.nodeName] = att.nodeValue;
+            obj[att.nodeName] = att.nodeValue;
         }
 
-        nodeDOM.redraw = function() {
+        obj.redraw = function() {
             if (nodeDOM.classList.contains('tiny-component')) {
                 nodeDOM.classList.remove('tiny-component');
             }
         };
 
-        nodeDOM.classList.add(`tiny-id-${nodeDOM.tinyid}`);
+        internal.domToObjMap.set(nodeDOM, obj);
+        nodeDOM.classList.add(`tiny-id-${obj.tinyid}`);
     }
 }
 
@@ -115,14 +118,14 @@ observer.observe(document.querySelector('body'), {
 
 /* Built-in Components */
 
-component('include', nodeDOM => {
-    if (nodeDOM.value == undefined) {
+component('include', (nodeDOM, obj) => {
+    if (obj.value == undefined) {
         console.error('include value missing!');
         return;
     }
-    includeHTML(nodeDOM, nodeDOM.value);
+    includeHTML(nodeDOM, obj.value);
 });
 
-component('echo', nodeDOM => {
-    nodeDOM.innerHTML = eval(nodeDOM.innerHTMLCached);
+component('echo', (nodeDOM, obj) => {
+    nodeDOM.innerHTML = eval(obj.innerHTML);
 });

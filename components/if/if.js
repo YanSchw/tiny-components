@@ -1,29 +1,29 @@
 "use strict";
 
-component('if', nodeDOM => {
-    if (nodeDOM.cond == undefined) {
+component('if', (nodeDOM, obj) => {
+    if (obj.cond == undefined) {
         console.error('The "if" Component requires an attribute named cond!');
         return;
     }
     
-    nodeDOM.result = eval(nodeDOM.cond);
-    if (nodeDOM.result) {
-        nodeDOM.innerHTML = nodeDOM.innerHTMLCached;
+    obj.result = eval(obj.cond);
+    if (obj.result) {
+        nodeDOM.innerHTML = obj.innerHTML;
     }
 
-    let elseComponent = select(`if.tiny-id-${nodeDOM.tinyid} + else`);
+    let elseComponent = select(`if.tiny-id-${obj.tinyid} + else`);
     if (elseComponent != null && elseComponent != undefined) {
-        elseComponent.ifResult = nodeDOM.result;
-        elseComponent.redraw();
+        elseComponent.ifResult = obj.result;
+        internal.domToObjMap.get(elseComponent).redraw();
     }
 });
 
-component('else', nodeDOM => {
+component('else', (nodeDOM, obj) => {
     if (nodeDOM.ifResult == undefined) {
         return;
     }
     
     if (!nodeDOM.ifResult) {
-        nodeDOM.innerHTML = nodeDOM.innerHTMLCached;
+        nodeDOM.innerHTML = obj.innerHTML;
     }
 });
