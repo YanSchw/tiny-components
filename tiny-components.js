@@ -9,7 +9,7 @@ if (!window._libTinyComponentLoaded) {
 const internal = {
     globalIdCounter: 1,
     componentMap: new Map(),
-    domToObjMap: new Map()
+    domToStateMap: new Map()
 };
 
 function includeHTML(nodeDOM, path) {
@@ -26,33 +26,33 @@ function includeHTML(nodeDOM, path) {
 
 function constructComponentInnerHTML(nodeDOM, func) {
     nodeDOM.innerHTML = "";
-    func(nodeDOM, internal.domToObjMap.get(nodeDOM));
+    func(nodeDOM, internal.domToStateMap.get(nodeDOM));
 
     let nodeList = nodeDOM.querySelectorAll(":scope > innerHTML");
     for (let inner of nodeList) {
-        inner.innerHTML = internal.domToObjMap.get(nodeDOM).innerHTML;
+        inner.innerHTML = internal.domToStateMap.get(nodeDOM).innerHTML;
     }
 }
 function createComponentObject(nodeDOM) {
-    if (!internal.domToObjMap.has(nodeDOM)) {
-        let obj = {};
-        obj.tinyid = internal.globalIdCounter++;
-        obj.innerHTML = nodeDOM.innerHTML;
+    if (!internal.domToStateMap.has(nodeDOM)) {
+        let state = {};
+        state.tinyid = internal.globalIdCounter++;
+        state.innerHTML = nodeDOM.innerHTML;
 
-        // Add Attributes to object
+        // Add Attributes to state object
         for (let att, i = 0, atts = nodeDOM.attributes, n = atts.length; i < n; i++) {
             att = atts[i];
-            obj[att.nodeName] = att.nodeValue;
+            state[att.nodeName] = att.nodeValue;
         }
 
-        obj.redraw = function() {
+        state.redraw = function() {
             if (nodeDOM.classList.contains('tiny-component')) {
                 nodeDOM.classList.remove('tiny-component');
             }
         };
 
-        internal.domToObjMap.set(nodeDOM, obj);
-        nodeDOM.classList.add(`tiny-id-${obj.tinyid}`);
+        internal.domToStateMap.set(nodeDOM, state);
+        nodeDOM.classList.add(`tiny-id-${state.tinyid}`);
     }
 }
 
@@ -89,6 +89,9 @@ function initializeAllComponents() {
 
 function component(tag, func) {
     internal.componentMap.set(tag, func);
+}
+function getState(node) {
+    return internal.domToStateMap.get(node);
 }
 
 function select(cssSelector) {

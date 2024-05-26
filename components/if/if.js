@@ -1,29 +1,29 @@
 "use strict";
 
-component('if', (nodeDOM, obj) => {
-    if (obj.cond == undefined) {
+component('if', (nodeDOM, state) => {
+    if (state.cond == undefined) {
         console.error('The "if" Component requires an attribute named cond!');
         return;
     }
     
-    obj.result = eval(obj.cond);
-    if (obj.result) {
-        nodeDOM.innerHTML = obj.innerHTML;
+    state.result = eval(state.cond);
+    if (state.result) {
+        nodeDOM.innerHTML = state.innerHTML;
     }
 
-    let elseComponent = select(`if.tiny-id-${obj.tinyid} + else`);
+    let elseComponent = select(`if.tiny-id-${state.tinyid} + else`);
     if (elseComponent != null && elseComponent != undefined) {
-        elseComponent.ifResult = obj.result;
-        internal.domToObjMap.get(elseComponent).redraw();
+        elseComponent.ifResult = state.result;
+        getState(elseComponent).redraw();
     }
 });
 
-component('else', (nodeDOM, obj) => {
+component('else', (nodeDOM, state) => {
     if (nodeDOM.ifResult == undefined) {
         return;
     }
     
     if (!nodeDOM.ifResult) {
-        nodeDOM.innerHTML = obj.innerHTML;
+        nodeDOM.innerHTML = state.innerHTML;
     }
 });
