@@ -9,7 +9,7 @@ if (!window._libTinyComponentLoaded) {
 const internal = {
     globalIdCounter: 1,
     componentMap: new Map(),
-    domToStateMap: new Map()
+    idToStateMap: new Map()
 };
 
 function includeHTML(node, path) {
@@ -26,15 +26,15 @@ function includeHTML(node, path) {
 
 function constructComponentInnerHTML(node, func) {
     node.innerHTML = "";
-    func(node, internal.domToStateMap.get(node));
+    func(node, getState(node));
 
     let nodeList = node.querySelectorAll(":scope > innerHTML");
     for (let inner of nodeList) {
-        inner.innerHTML = internal.domToStateMap.get(node).innerHTML;
+        inner.innerHTML = getState(node).innerHTML;
     }
 }
 function createComponentObject(node) {
-    if (!internal.domToStateMap.has(node)) {
+    if (getState(node) == undefined || getState(node) == null) {
         let state = {};
         state.tinyid = internal.globalIdCounter++;
         state.innerHTML = node.innerHTML;
@@ -51,7 +51,7 @@ function createComponentObject(node) {
             }
         };
 
-        internal.domToStateMap.set(node, state);
+        internal.idToStateMap.set(state.tinyid, state);
         node.classList.add(`tiny-id-${state.tinyid}`);
     }
 }
@@ -91,7 +91,12 @@ function component(tag, func) {
     internal.componentMap.set(tag, func);
 }
 function getState(node) {
-    return internal.domToStateMap.get(node);
+    for (let it of node.classList) {
+        if (it.startsWith('tiny-id-')) {
+            return internal.idToStateMap.get(parseInt(it.substring(8)));
+        }
+    }
+    return undefined;
 }
 
 function select(cssSelector) {
