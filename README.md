@@ -88,6 +88,7 @@ The built-in **echo** Component Parses a block of JavaScript and puts the last e
 This creates a Paragraph, that says **hello**
 
 ## Additional Components
+- https://yanschw.github.io/tiny-components/components/if/index.html
 
 ## Examples
 Here are some examples:
