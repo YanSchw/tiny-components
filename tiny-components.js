@@ -98,6 +98,9 @@ function getState(node) {
     }
     return undefined;
 }
+Element.prototype.state = function() {
+    return getState(this);
+}
 
 function select(cssSelector) {
     return document.querySelector(cssSelector);
