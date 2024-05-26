@@ -26,7 +26,7 @@ Then, add an HTML Tag that has the same name as your Component into the DOM.
 ```HTML
 <my-hello-world-component sometextvalue="Hello!"></my-hello-world-component>
 ```
-Attributes you define in the HTML are available as Attributes in the JavaScript object.
+Attributes you define in the HTML are available as Attributes in the JavaScript **state**.
 
 **'Hello!'** now appears in the Component's place.
 
