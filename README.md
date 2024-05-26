@@ -3,13 +3,17 @@
 This is a lightweight JavaScript library, that allows you to dynamically create reuseable Components through HTML Tags.
 You will use plain and standard HTML with custom elements. However the library only comes with 2 built-in Component, so there is no bloat, no new HTML dialect, no boilerplate, no syntax sugar to learn.
 
-## What is a Component?
-
 ## Embed &lt;tiny-components&gt; into your Website
 Add the following script tag as the first script of your html document.
 ```HTML
 <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
 ```
+
+## What is a Component?
+A Component is just a HTML Tag and an anonymous **Create-Function** (see below).
+This function takes in:
+- A **node** this is the Node | Element in the DOM. It is the same object you retrieve e.g. through document.querySelector(...);
+- A **state** this is tiny-components State of this DOM object. You can use it to do common operations on your element.
 
 ## Create your first Component
 First, define your Component in JavaScript.
