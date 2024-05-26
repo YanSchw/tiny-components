@@ -10,12 +10,12 @@
             component('if-test', (nodeDOM, obj) => {
                 nodeDOM.innerHTML = '<innerHTML></innerHTML>';
 
-                let button = document.createElement('button');
-                button.innerHTML = 'Click me!';
-                button.onclick = () => {
-                    obj.redraw();
-                };
-                nodeDOM.appendChild(button);
+                createNode('button', nodeDOM, button => {
+                    button.innerHTML = 'Click me to redraw and regenerate!';
+                    button.onclick = () => {
+                        obj.redraw();
+                    };
+                });
             });
         </script>
 

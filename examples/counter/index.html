@@ -12,14 +12,14 @@
                 }
                 nodeDOM.innerHTML += `<p>The button was clicked ${obj.count} times.</p>`;
 
-                let button = document.createElement('button');
-                button.innerHTML = 'Click me!';
-                button.onclick = () => {
-                    obj.count++;
-                    obj.redraw();
-                    console.log('button clicked.');
-                };
-                nodeDOM.appendChild(button);
+                createNode('button', nodeDOM, button => {
+                    button.innerHTML = 'Click me!';
+                    button.onclick = () => {
+                        obj.count++;
+                        obj.redraw();
+                        console.log('button clicked.');
+                    };
+                });
             });
         </script>
 
