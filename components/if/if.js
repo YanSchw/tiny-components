@@ -14,7 +14,9 @@ component('if', (node, state) => {
     let elseComponent = select(`if.tiny-id-${state.tinyid} + else`);
     if (elseComponent != null && elseComponent != undefined) {
         elseComponent.ifResult = state.result;
-        getState(elseComponent).redraw();
+        if (getState(elseComponent).tinyid != undefined) {
+            getState(elseComponent).redraw();
+        }
     }
 });
 
