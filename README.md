@@ -14,8 +14,8 @@ Add the following script tag as the first script of your html document.
 ## Create your first Component
 First, define your Component in JavaScript.
 ```js
-component('my-hello-world-component', (nodeDOM, state) => {
-    nodeDOM.innerHTML = state.sometextvalue;
+component('my-hello-world-component', (node, state) => {
+    node.innerHTML = state.sometextvalue;
 });
 ```
 Then, add an HTML Tag that has the same name as your Component into the DOM.
@@ -29,13 +29,13 @@ Attributes you define in the HTML are available as Attributes in the JavaScript 
 ## Redrawing Components
 If you want to redraw a Component, you have to explicitly tell the library to do so.
 ```js
-component('my-redrawing-button', (nodeDOM, state) => {
+component('my-redrawing-button', (node, state) => {
     let button = document.createElement('button');
     button.innerHTML = 'Redraw this Component';
     button.onclick = () => {
         state.redraw();
     };
-    nodeDOM.appendChild(button);
+    node.appendChild(button);
 });
 ```
 

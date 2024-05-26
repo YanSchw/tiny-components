@@ -7,10 +7,10 @@
         <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
         <script src="https://YanSchw.github.io/tiny-components/components/if/if.js"></script>
         <script>
-            component('if-test', (nodeDOM, state) => {
-                nodeDOM.innerHTML = '<innerHTML></innerHTML>';
+            component('if-test', (node, state) => {
+                node.innerHTML = '<innerHTML></innerHTML>';
 
-                createNode('button', nodeDOM, button => {
+                createNode('button', node, button => {
                     button.innerHTML = 'Click me to redraw and regenerate!';
                     button.onclick = () => {
                         state.redraw();

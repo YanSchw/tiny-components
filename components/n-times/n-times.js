@@ -1,6 +1,6 @@
 "use strict";
 
-component('n-times', (nodeDOM, obj) => {
+component('n-times', (node, obj) => {
     if (obj.n == undefined) {
         console.error('The "n-times" Component requires an attribute named n!');
         return;
@@ -8,6 +8,6 @@ component('n-times', (nodeDOM, obj) => {
     
     let n = parseInt(obj.n);
     for (let i = 0; i < n; i++) {
-        nodeDOM.innerHTML += '<innerHTML></innerHTML>';
+        node.innerHTML += '<innerHTML></innerHTML>';
     }
 });

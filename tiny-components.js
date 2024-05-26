@@ -12,11 +12,11 @@ const internal = {
     domToStateMap: new Map()
 };
 
-function includeHTML(nodeDOM, path) {
+function includeHTML(node, path) {
     try {
         fetch(path).then(response => {
             response.text().then(txt => {
-                nodeDOM.innerHTML += txt;
+                node.innerHTML += txt;
             });
         });
     } catch(error) {
@@ -24,55 +24,55 @@ function includeHTML(nodeDOM, path) {
     }
 }
 
-function constructComponentInnerHTML(nodeDOM, func) {
-    nodeDOM.innerHTML = "";
-    func(nodeDOM, internal.domToStateMap.get(nodeDOM));
+function constructComponentInnerHTML(node, func) {
+    node.innerHTML = "";
+    func(node, internal.domToStateMap.get(node));
 
-    let nodeList = nodeDOM.querySelectorAll(":scope > innerHTML");
+    let nodeList = node.querySelectorAll(":scope > innerHTML");
     for (let inner of nodeList) {
-        inner.innerHTML = internal.domToStateMap.get(nodeDOM).innerHTML;
+        inner.innerHTML = internal.domToStateMap.get(node).innerHTML;
     }
 }
-function createComponentObject(nodeDOM) {
-    if (!internal.domToStateMap.has(nodeDOM)) {
+function createComponentObject(node) {
+    if (!internal.domToStateMap.has(node)) {
         let state = {};
         state.tinyid = internal.globalIdCounter++;
-        state.innerHTML = nodeDOM.innerHTML;
+        state.innerHTML = node.innerHTML;
 
         // Add Attributes to state object
-        for (let att, i = 0, atts = nodeDOM.attributes, n = atts.length; i < n; i++) {
+        for (let att, i = 0, atts = node.attributes, n = atts.length; i < n; i++) {
             att = atts[i];
             state[att.nodeName] = att.nodeValue;
         }
 
         state.redraw = function() {
-            if (nodeDOM.classList.contains('tiny-component')) {
-                nodeDOM.classList.remove('tiny-component');
+            if (node.classList.contains('tiny-component')) {
+                node.classList.remove('tiny-component');
             }
         };
 
-        internal.domToStateMap.set(nodeDOM, state);
-        nodeDOM.classList.add(`tiny-id-${state.tinyid}`);
+        internal.domToStateMap.set(node, state);
+        node.classList.add(`tiny-id-${state.tinyid}`);
     }
 }
 
-function initializeComponent(nodeDOM, func) {
-    if (!nodeDOM.classList.contains('tiny-component')) {
-        nodeDOM.classList.add('tiny-component');
-        createComponentObject(nodeDOM);
-        constructComponentInnerHTML(nodeDOM, func);
+function initializeComponent(node, func) {
+    if (!node.classList.contains('tiny-component')) {
+        node.classList.add('tiny-component');
+        createComponentObject(node);
+        constructComponentInnerHTML(node, func);
     }
 }
 
 function initializeAllComponents() {
     for (let comp of internal.componentMap) {
         let nodeList = document.querySelectorAll(comp[0]);
-        for (let nodeDOM of nodeList) {
+        for (let node of nodeList) {
 
             let init = true;
 
             for (let otherComp of internal.componentMap) {
-                if (nodeDOM.parentElement.closest(`${otherComp[0]}:not(.tiny-component)`) != null) {
+                if (node.parentElement.closest(`${otherComp[0]}:not(.tiny-component)`) != null) {
                     // There is an uninitialized Parent
                     setTimeout(() => { initializeAllComponents(); }, 0);
                     init = false;
@@ -81,7 +81,7 @@ function initializeAllComponents() {
             }
 
             if (init) {
-                initializeComponent(nodeDOM, comp[1]);
+                initializeComponent(node, comp[1]);
             }
         }
     }
@@ -121,14 +121,14 @@ observer.observe(document.querySelector('body'), {
 
 /* Built-in Components */
 
-component('include', (nodeDOM, obj) => {
+component('include', (node, obj) => {
     if (obj.value == undefined) {
         console.error('include value missing!');
         return;
     }
-    includeHTML(nodeDOM, obj.value);
+    includeHTML(node, obj.value);
 });
 
-component('echo', (nodeDOM, obj) => {
-    nodeDOM.innerHTML = eval(obj.innerHTML);
+component('echo', (node, obj) => {
+    node.innerHTML = eval(obj.innerHTML);
 });

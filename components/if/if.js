@@ -1,6 +1,6 @@
 "use strict";
 
-component('if', (nodeDOM, state) => {
+component('if', (node, state) => {
     if (state.cond == undefined) {
         console.error('The "if" Component requires an attribute named cond!');
         return;
@@ -8,7 +8,7 @@ component('if', (nodeDOM, state) => {
     
     state.result = eval(state.cond);
     if (state.result) {
-        nodeDOM.innerHTML = state.innerHTML;
+        node.innerHTML = state.innerHTML;
     }
 
     let elseComponent = select(`if.tiny-id-${state.tinyid} + else`);
@@ -18,12 +18,12 @@ component('if', (nodeDOM, state) => {
     }
 });
 
-component('else', (nodeDOM, state) => {
-    if (nodeDOM.ifResult == undefined) {
+component('else', (node, state) => {
+    if (node.ifResult == undefined) {
         return;
     }
     
-    if (!nodeDOM.ifResult) {
-        nodeDOM.innerHTML = state.innerHTML;
+    if (!node.ifResult) {
+        node.innerHTML = state.innerHTML;
     }
 });
