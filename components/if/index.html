@@ -7,13 +7,13 @@
         <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
         <script src="https://YanSchw.github.io/tiny-components/components/if/if.js"></script>
         <script>
-            component('if-test', (nodeDOM, obj) => {
+            component('if-test', nodeDOM => {
                 nodeDOM.innerHTML = '<innerHTML></innerHTML>';
 
                 createNode('button', nodeDOM, button => {
                     button.innerHTML = 'Click me to redraw and regenerate!';
                     button.onclick = () => {
-                        obj.redraw();
+                        nodeDOM.redraw();
                     };
                 });
             });

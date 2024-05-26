@@ -6,17 +6,17 @@
     <body>
         <script src="https://YanSchw.github.io/tiny-components/tiny-components.js"></script>
         <script>
-            component('counter', (nodeDOM, obj) => {
-                if (obj.count == undefined) {
-                    obj.count = 0;
+            component('counter', nodeDOM => {
+                if (nodeDOM.count == undefined) {
+                    nodeDOM.count = 0;
                 }
-                nodeDOM.innerHTML += `<p>The button was clicked ${obj.count} times.</p>`;
+                nodeDOM.innerHTML += `<p>The button was clicked ${nodeDOM.count} times.</p>`;
 
                 createNode('button', nodeDOM, button => {
                     button.innerHTML = 'Click me!';
                     button.onclick = () => {
-                        obj.count++;
-                        obj.redraw();
+                        nodeDOM.count++;
+                        nodeDOM.redraw();
                         console.log('button clicked.');
                     };
                 });
