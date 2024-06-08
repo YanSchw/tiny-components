@@ -117,10 +117,10 @@ function createNode(tag, parent, lambda) {
 document.addEventListener("DOMContentLoaded", (event) => {
     initializeAllComponents();
 });
-const observer = new MutationObserver((mutations) => {
+const observerForDomMutations = new MutationObserver((mutations) => {
     initializeAllComponents();
 });
-observer.observe(document.querySelector('body'), {
+observerForDomMutations.observe(document.querySelector('body'), {
     subtree: true,
     childList: true,
     attributes: true,
