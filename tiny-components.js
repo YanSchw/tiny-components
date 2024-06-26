@@ -110,8 +110,9 @@ function selectAll(cssSelector) {
 }
 function createNode(tag, parent, lambda) {
     let element = document.createElement(tag);
-    lambda(element);
     parent.appendChild(element);
+    lambda(element);
+    return element;
 }
 
 document.addEventListener("DOMContentLoaded", (event) => {
